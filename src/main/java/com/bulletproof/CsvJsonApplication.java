@@ -1,26 +1,26 @@
 package com.bulletproof;
 
-
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 
-
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class CsvJsonApplication {
 
-	public static HashMap<Long, Customer> hmCustomer;
+    public static HashMap<String, Customer> hmCustomer;
+    // public static long ID;
+    public static String jsonCustomer;
 
-	public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
 
-		hmCustomer = new HashMap<Long, Customer>();
+	Parser parser = new Parser();
+	parser.parseData();
+	jsonCustomer = parser.getJsondata();
 
-		Customer c1 = new Customer("Pradeep", "Sadashiv", "Bangalore");
-		hmCustomer.put((long) 1,c1);
-		
-		Customer c2 = new Customer("Rajesh", "Pai", "Sydney");
-		hmCustomer.put((long) 2,c2);
-		
-	}
+	SpringApplication.run(CsvJsonApplication.class, args);
+    }
 
 }

@@ -1,45 +1,70 @@
 package com.bulletproof;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
+@Indexed
+@Entity
 public class Customer {
 
-	private String firstname;
-	private String lastname;
-	private String city;
+    private static long counter = 1;
 
-	public Customer(String firstname, String lastname, String city) {
+    @Id
+    private long id;
+    @Field
+    private String firstname;
+    @Field
+    private String lastname;
+    @Field
+    private String city;
 
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.city = city;
-	}
+    public Customer(String firstname, String lastname, String city) {
 
-	public String getFirstname() {
-		return firstname;
-	}
+	this.id = counter++;
+	// TODO use UUID.randomUUID().toString() later
+	this.firstname = firstname;
+	this.lastname = lastname;
+	this.city = city;
+    }
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
+    public long getId() {
+	return id;
+    }
 
-	public String getLastname() {
-		return lastname;
-	}
+    public void setId(long id) {
+	this.id = id;
+    }
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
+    public String getFirstname() {
+	return firstname;
+    }
 
-	public String getCity() {
-		return city;
-	}
+    public void setFirstname(String firstname) {
+	this.firstname = firstname;
+    }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public String getLastname() {
+	return lastname;
+    }
 
-	@Override
-	public String toString() {
-		return "Customer [ firstname=" + firstname + ", lastname=" + lastname + ", city=" + city + "]";
-	}
+    public void setLastname(String lastname) {
+	this.lastname = lastname;
+    }
+
+    public String getCity() {
+	return city;
+    }
+
+    public void setCity(String city) {
+	this.city = city;
+    }
+
+    @Override
+    public String toString() {
+	return "Customer [ ID =" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", city=" + city + "]";
+    }
 
 }
